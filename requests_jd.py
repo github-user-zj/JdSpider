@@ -97,7 +97,7 @@ class Spider_JD():
 
         code, res = self.get(url, params)
         if code == 1:
-            return 1, res 
+            return res 
      
         df = self.parse_html(res.text)
         df02 = self.get_comment(df["pid"].tolist())
@@ -123,7 +123,7 @@ class Spider_JD():
             }
         code, res = self.get(url, params)
         if code == 1:
-            return
+            return res
 
         # with open("data.html", "w") as f:
         #     f.write(res.text.encode("utf-8"))
@@ -142,9 +142,9 @@ class Spider_JD():
         url = "https://club.jd.com/comment/productCommentSummaries.action?referenceIds={}&callback=&_=".format(pids)
         code, res = self.get(url)
         if code == 1:
-            return 1, res 
-        with open("data.html", "w") as f:
-            f.write(res.text.encode("utf-8"))
+            return res 
+        #with open("data.html", "w") as f:
+        #    f.write(res.text.encode("utf-8"))
         
         df02 = pd.DataFrame(columns=('pid', 'count'))
         commont_json = res.json()
